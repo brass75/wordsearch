@@ -113,10 +113,11 @@ def fill_grid(grid: list[list[str]]):
     :param grid: The grid
     :return: Updated grid with all spaces filled with letters
     """
+    fillers = [letter for letter in LETTERS if letter not in 'JQZX']
     for row in grid:
         for i, c in enumerate(row):
             if c == '.':
-                row[i] = choice(LETTERS)
+                row[i] = choice(fillers)
 
 
 def get_options(size: int) -> list[tuple[int, int]]:
@@ -131,7 +132,9 @@ def get_options(size: int) -> list[tuple[int, int]]:
     return options
 
 
-def build_search(backwards: bool, diagonal: bool, grid_size: int, words: list[str]) -> tuple[list[list[str]], list[str]]:
+def build_search(
+    backwards: bool, diagonal: bool, grid_size: int, words: list[str]
+) -> tuple[list[list[str]], list[str]]:
     """
     Build the search
 
@@ -166,7 +169,7 @@ def build_search(backwards: bool, diagonal: bool, grid_size: int, words: list[st
     return grid, word_list
 
 
-def parse_args()-> Namespace:
+def parse_args() -> Namespace:
     """
     Parse the command line arguments
 
@@ -210,11 +213,7 @@ def parse_args()-> Namespace:
         help='List of words for the search.',
     )
     parser.add_argument(
-        '-k',
-        '--answer-key',
-        action='store_true',
-        dest='answer_key',
-        help='Print the answer key ahead of the puzzle.'
+        '-k', '--answer-key', action='store_true', dest='answer_key', help='Print the answer key ahead of the puzzle.'
     )
     return parser.parse_args()
 
@@ -260,12 +259,13 @@ def output_search(answer_key: bool, grid: list[list[str]], word_list: list[str])
     print('\n\n\nPuzzle\n\n')
     print(grid_as_str(grid))
     print('\n\nWord List\n\n')
+    shuffle(word_list)
     for n in range(0, len(word_list), 5):
-        print(', '.join(word_list[n: n + 5]))
+        print(' '.join(word_list[n : n + 5]))
 
 
 def print_parameters(backwards: bool, diagonal: bool, grid_size: int, words: list[str]):
-    """ Print the parameters being used to create the search """
+    """Print the parameters being used to create the search"""
     print('Welcome to the Word Search Generator')
     print('We will be creating your search with the following attributes:')
     print(f'\tThe grid will be {grid_size}x{grid_size} letters.')
@@ -273,7 +273,7 @@ def print_parameters(backwards: bool, diagonal: bool, grid_size: int, words: lis
     print(f'\tWe will {'allow' if backwards else 'not allow'} words to be placed backwards.')
     print('\tThe words we are using are:')
     for n in range(0, len(words), 5):
-        print('\t\t' + ', '.join(words[n: n + 5]))
+        print('\t\t' + ', '.join(words[n : n + 5]))
 
 
 def main():
