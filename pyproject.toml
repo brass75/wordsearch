@@ -33,3 +33,9 @@ exclude = [
 quote-style = "single"
 indent-style = "space"
 docstring-code-format = true
+
+[dependency-groups]
+dev = [
+    "coverage>=7.8.0",
+    "pytest>=8.3.5",
+]
