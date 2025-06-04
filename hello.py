@@ -1,6 +1,6 @@
 def main():
-    print("Hello from wordsearch!")
+    print('Hello from wordsearch!')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
