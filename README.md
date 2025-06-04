@@ -19,7 +19,7 @@ pip install py-wordsearch-gen
 To use just run `wordsearch` from the command line.
 
 ```shell
-usage: py_wordsearch_gen.py [-h] [-s SIZE] [-m MIN] [-d] [-r] [-k] words [words ...]
+usage: wordsearch [-h] [-s SIZE] [-m MIN] [-d] [-r] [-k] words [words ...]
 
 Word Search Generator
 

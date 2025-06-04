@@ -2,6 +2,7 @@
 
 import argparse
 import copy
+import sys
 from argparse import Namespace
 from itertools import permutations
 from random import choice, randint, shuffle
@@ -176,7 +177,7 @@ def parse_args() -> Namespace:
     :return: The parsed command line arguments
     """
     parser = argparse.ArgumentParser(
-        prog='py_wordsearch_gen.py',
+        prog=sys.argv[0].rsplit('/', 1)[-1],
         description='Word Search Generator',
     )
     parser.add_argument(
