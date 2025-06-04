@@ -22,7 +22,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version-file: pyproject.toml
-      # Update output format to enable automatic inline annotations.
+      - name: Install Ruff
+        run: uv pip install ruff
       - name: Run Ruff
         run: ruff check --output-format=github .
       - name: Ruff format
