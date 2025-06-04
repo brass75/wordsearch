@@ -16,10 +16,12 @@ dependencies = [
 ]
 
 [project.urls]
-Home = "https://github.com/brass75/wordsearch"
+homepage = "https://github.com/brass75/wordsearch"
+Repository = "https://github.com/brass75/wordsearch"
 
-[project.scrripts]
-wordsearch = "py-wordsearch-gen.wordsearch:main"
+
+[project.scripts]
+wordsearch = "py_wordsearch_gen.wordsearch:main"
 
 [tool.ruff]
 target-version = "py312"
