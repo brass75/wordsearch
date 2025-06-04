@@ -3,7 +3,7 @@ requires = ["flit_core >=3.11,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "wordsearch"
+name = "py-wordsearch-gen"
 version = "0.1.0"
 description = "Command line tool to generate fun to play word searches."
 readme = "README.md"
