@@ -1,6 +1,6 @@
 import pytest
 
-from wordsearch import wordsearch
+from py_wordsearch_gen import wordsearch
 
 
 @pytest.fixture
@@ -10,9 +10,9 @@ def test_grid():
 
 @pytest.fixture
 def patches(monkeypatch):
-    monkeypatch.setattr('wordsearch.wordsearch.choice', lambda list_: list_[-1])
-    monkeypatch.setattr('wordsearch.wordsearch.shuffle', lambda list_: list_)
-    monkeypatch.setattr('wordsearch.wordsearch.randint', lambda *_, **__: 0)
+    monkeypatch.setattr('py_wordsearch_gen.wordsearch.choice', lambda list_: list_[-1])
+    monkeypatch.setattr('py_wordsearch_gen.wordsearch.shuffle', lambda list_: list_)
+    monkeypatch.setattr('py_wordsearch_gen.wordsearch.randint', lambda *_, **__: 0)
 
 
 class TestWordSearch:

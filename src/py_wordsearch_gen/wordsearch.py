@@ -176,7 +176,7 @@ def parse_args() -> Namespace:
     :return: The parsed command line arguments
     """
     parser = argparse.ArgumentParser(
-        prog='wordsearch.py',
+        prog='py_wordsearch_gen.py',
         description='Word Search Generator',
     )
     parser.add_argument(

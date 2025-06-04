@@ -19,7 +19,7 @@ dependencies = [
 Home = "https://github.com/brass75/wordsearch"
 
 [project.scrripts]
-wordsearch = "wordsearch.wordsearch:main"
+wordsearch = "py-wordsearch-gen.wordsearch:main"
 
 [tool.ruff]
 target-version = "py312"
