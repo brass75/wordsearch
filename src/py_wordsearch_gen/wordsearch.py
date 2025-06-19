@@ -80,14 +80,15 @@ def grid_as_str(grid: list[list[str]]) -> str:
     return '\n'.join(' '.join(row) for row in grid)
 
 
-def fill_grid(grid: list[list[str]]):
+def fill_grid(grid: list[list[str]], excluded_letters: list[str]):
     """
     Fill unfilled locations in the grid with letters
 
     :param grid: The grid
+    :param excluded_letters: List of letters to not use as fill.
     :return: Updated grid with all spaces filled with letters
     """
-    fillers = [letter for letter in LETTERS if letter not in 'JQZX']
+    fillers = [letter for letter in LETTERS if letter not in excluded_letters]
     for row in grid:
         for i, c in enumerate(row):
             if c == '.':
@@ -144,7 +145,7 @@ def build_search(
     return grid, word_list
 
 
-def output_search(answer_key: bool, grid: list[list[str]], word_list: list[str]):
+def output_search(answer_key: bool, grid: list[list[str]], word_list: list[str], excluded_letters: list[str]):
     """
     Print the word search
 
@@ -155,7 +156,7 @@ def output_search(answer_key: bool, grid: list[list[str]], word_list: list[str])
     if answer_key:
         print('\n\n\nAnswer Key\n\n')
         print(grid_as_str(grid))
-    fill_grid(grid)
+    fill_grid(grid, excluded_letters)
     print('\n\n\nPuzzle\n\n')
     print(grid_as_str(grid))
     print('\n\nWord List\n\n')
@@ -165,13 +166,13 @@ def output_search(answer_key: bool, grid: list[list[str]], word_list: list[str])
 
 
 def main():
-    answer_key, backwards, diagonal, grid_size, words = get_parameters()
+    answer_key, backwards, diagonal, grid_size, words, excluded_letters = get_parameters()
 
-    print_parameters(backwards, diagonal, grid_size, words)
+    print_parameters(backwards, diagonal, grid_size, words, excluded_letters)
 
     grid, word_list = build_search(backwards, diagonal, grid_size, words)
 
-    output_search(answer_key, grid, word_list)
+    output_search(answer_key, grid, word_list, excluded_letters)
 
 
 if __name__ == '__main__':

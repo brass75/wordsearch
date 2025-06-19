@@ -28,3 +28,5 @@ LETTERS = [
     'Y',
     'Z',
 ]
+
+EXCLUDED_LETTERS = 'JQXZ'

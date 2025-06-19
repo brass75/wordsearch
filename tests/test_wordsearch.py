@@ -1,6 +1,7 @@
 import pytest
 
 from py_wordsearch_gen import wordsearch
+from py_wordsearch_gen.consts import EXCLUDED_LETTERS
 
 
 @pytest.fixture
@@ -17,7 +18,7 @@ def patches(monkeypatch):
 
 class TestWordSearch:
     def test_fill_grid(self, test_grid, patches):
-        wordsearch.fill_grid(test_grid)
+        wordsearch.fill_grid(test_grid, list(EXCLUDED_LETTERS))
         assert test_grid == [['Y' for _ in range(5)] for _ in range(5)]
 
     def test_grid_as_str(self, test_grid):
