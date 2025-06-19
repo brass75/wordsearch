@@ -36,7 +36,7 @@ class TestWordSearch:
             (
                 False,
                 False,
-                5,
+                (5, 5),
                 ['GIRL', 'BOY', 'DOG'],
                 (
                     [
@@ -53,7 +53,7 @@ class TestWordSearch:
             (
                 False,
                 False,
-                5,
+                (5, 6),
                 ['GIRL', 'BOY', 'DOG', 'TOOLONG'],
                 (
                     [
@@ -61,6 +61,7 @@ class TestWordSearch:
                         ['.', 'O', 'O', 'I', '.'],
                         ['.', 'G', 'Y', 'R', '.'],
                         ['.', '.', '.', 'L', '.'],
+                        ['.', '.', '.', '.', '.'],
                         ['.', '.', '.', '.', '.'],
                     ],
                     ['GIRL', 'BOY', 'DOG', 'TOOLONG'],
@@ -70,7 +71,7 @@ class TestWordSearch:
             (
                 True,
                 True,
-                5,
+                (5, 6),
                 ['GIRL', 'BOY', 'DOG', 'CHILD'],
                 (
                     [
@@ -79,6 +80,7 @@ class TestWordSearch:
                         ['D', 'B', 'I', 'R', '.'],
                         ['.', 'H', 'I', '.', '.'],
                         ['C', 'G', '.', '.', '.'],
+                        ['.', '.', '.', '.', '.'],
                     ],
                     ['GIRL', 'BOY', 'DOG', 'CHILD'],
                 ),

@@ -30,7 +30,7 @@ def get_next(x: int, y: int, d: str) -> tuple[int, int]:
     raise ValueError(f'Invalid direction {d}')
 
 
-def can_place(word: str, x: int, y: int, d: str, grid: list[list[str]]) -> bool:
+def can_place(word: str, x: int, y: int, d: str, grid: list[list[str]], width: int, height: int) -> bool:
     """
     Determine whether a word can be placed at the gine starting coordinates
 
@@ -39,11 +39,13 @@ def can_place(word: str, x: int, y: int, d: str, grid: list[list[str]]) -> bool:
     :param y: y coordinate
     :param d: direction to place the word
     :param grid: The grid
+    :param width: Width of the grid
+    :param height: Height of the grid
     :return: True if it is possible to place the word otherwise false
     """
     nx, ny = x, y
     for c in word:
-        if not (0 <= nx < len(grid) and 0 <= ny < len(grid)):
+        if not (0 <= nx < height and 0 <= ny < width):
             return False
         existing = grid[nx][ny]
         if not (c == existing or existing == '.'):
@@ -105,7 +107,7 @@ def get_options(size: int) -> list[tuple[int, int]]:
 
 
 def build_search(
-    backwards: bool, diagonal: bool, grid_size: int, words: list[str]
+    backwards: bool, diagonal: bool, grid_size: tuple[int, int], words: list[str]
 ) -> tuple[list[list[str]], list[str]]:
     """
     Build the search
@@ -116,7 +118,8 @@ def build_search(
     :param words: The words to place
     :return: The word search containing only the entered words (the answer key)
     """
-    grid = [['.' for _ in range(grid_size)] for _ in range(grid_size)]
+    width, height = grid_size
+    grid = [['.' for _ in range(width)] for _ in range(height)]
     directions = ['h', 'v']
     if diagonal:
         directions.extend(['dd', 'du'])
@@ -127,8 +130,8 @@ def build_search(
         word = _word[::-1] if (backwards and randint(0, 1)) else _word
         while _directions:
             direction = choice(_directions)
-            for x, y in get_options(grid_size):
-                if can_place(word, x, y, direction, grid):
+            for x, y in get_options(max(grid_size)):
+                if can_place(word, x, y, direction, grid, width, height):
                     place(word, x, y, direction, grid)
                     break
             else:
@@ -161,11 +164,11 @@ def output_search(answer_key: bool, grid: list[list[str]], word_list: list[str])
         print(' '.join(word_list[n : n + 5]))
 
 
-def print_parameters(backwards: bool, diagonal: bool, grid_size: int, words: list[str]):
+def print_parameters(backwards: bool, diagonal: bool, grid_size: tuple[int, int], words: list[str]):
     """Print the parameters being used to create the search"""
     print('Welcome to the Word Search Generator')
     print('We will be creating your search with the following attributes:')
-    print(f'\tThe grid will be {grid_size}x{grid_size} letters.')
+    print(f'\tThe grid will be {"x".join(map(str, grid_size))} letters.')
     print(f'\tWe will {"allow" if diagonal else "not allow"} words to be placed diagonally.')
     print(f'\tWe will {"allow" if backwards else "not allow"} words to be placed backwards.')
     print('\tThe words we are using are:')
