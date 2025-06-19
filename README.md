@@ -19,7 +19,7 @@ pip install py-wordsearch-gen
 To use just run `wordsearch` from the command line.
 
 ```shell
-usage: wordsearch.py [-h] [-w [WIDTH]] [-t [HEIGHT]] [-m [MIN_WORD]] [-d] [-r] [-k] words [words ...]
+usage: wordsearch.py [-h] [-w [WIDTH]] [-t [HEIGHT]] [-m [MIN_WORD]] [-d] [-r] [-k] [-x [EXCLUDED_LETTERS]] words [words ...]
 
 Word Search Generator
 
@@ -35,4 +35,6 @@ options:
   -d, --diagonal        Allow words to be placed diagonally.
   -r, --reverse         Allow words to be placed backwards.
   -k, --answer-key      Print the answer key ahead of the puzzle.
+  -x, --exclude [EXCLUDED_LETTERS]
+                        A list of letters to be excluded as fill. Defaults to 'JQXZ'
 ```
