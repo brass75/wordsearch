@@ -8,6 +8,8 @@ from dykes.options import Flags, NArgs
 
 from py_wordsearch_gen.consts import LETTERS
 
+OPTIONAL = NArgs('?')
+
 
 @dataclass
 class WSArgs:
@@ -18,16 +20,22 @@ class WSArgs:
         'List of words for the search.',
         NArgs(value='+'),
     ]
-    size: Annotated[
+    width: Annotated[
         int,
-        'The size of the word search grid from 5 - 50. (Default: 10)',
-        NArgs('?'),
-        Flags('-s', '--size'),
+        'Width of puzzle, (Default: 10)',
+        OPTIONAL,
+        Flags('-w', '--width'),
     ] = 10
+    height: Annotated[
+        int,
+        'Height of puzzle, If not set will be the same as the width (square puzzle.)',
+        OPTIONAL,
+        Flags('-t', '--height'),
+    ] = 0
     min_word: Annotated[
         int,
         'The minimum word length. Cannot be larger than the size of the grid. (Default: 4)',
-        NArgs('?'),
+        OPTIONAL,
         Flags('-m', '--min'),
     ] = 4
     diagonal: Annotated[StoreTrue, 'Allow words to be placed diagonally.'] = False
@@ -39,23 +47,26 @@ class WSArgs:
     ] = False
 
 
-def get_parameters() -> tuple[bool, bool, bool, int, list[str]]:
+def get_parameters() -> tuple[bool, bool, bool, tuple[int, int], list[str]]:
     """
     Get the parameters for the word search
 
     :return: The parameters for the word search
     """
     args = parse_args(WSArgs)
-    if not 5 <= (grid_size := args.size) <= 50:
+    width = args.width
+    height = args.height if args.height else width
+    grid_size = (width, height)
+    if not all(5 <= dimension <= 50 for dimension in grid_size):
         print(f'Illegal size: {grid_size}. Grid size must be between 5 and 50.')
         exit(1)
-    if not 3 <= (shortest := args.min_word) <= grid_size:
-        print(f'Illegal minimum word length {shortest}. Must be between 3 and {grid_size}.')
+    if not 3 <= (shortest := args.min_word) <= min(grid_size):
+        print(f'Illegal minimum word length {shortest}. Must be between 3 and {min(grid_size)}.')
         exit(1)
     if illegal_words := [
         word
         for word in args.words
-        if (len(word) < shortest or len(word) > grid_size) or any(letter not in LETTERS for letter in word.upper())
+        if (len(word) < shortest or len(word) > max(grid_size)) or any(letter not in LETTERS for letter in word.upper())
     ]:
         print('Illegal words found:')
         for word in illegal_words:
@@ -63,3 +74,15 @@ def get_parameters() -> tuple[bool, bool, bool, int, list[str]]:
         exit(1)
     words = [word.upper() for word in args.words]
     return args.answer_key, args.reverse, args.diagonal, grid_size, words
+
+
+def print_parameters(backwards: bool, diagonal: bool, grid_size: tuple[int, int], words: list[str]):
+    """Print the parameters being used to create the search"""
+    print('Welcome to the Word Search Generator')
+    print('We will be creating your search with the following attributes:')
+    print(f'\tThe grid will be {"x".join(map(str, grid_size))} letters.')
+    print(f'\tWe will {"allow" if diagonal else "not allow"} words to be placed diagonally.')
+    print(f'\tWe will {"allow" if backwards else "not allow"} words to be placed backwards.')
+    print('\tThe words we are using are:')
+    for n in range(0, len(words), 5):
+        print('\t\t' + ', '.join(words[n : n + 5]))

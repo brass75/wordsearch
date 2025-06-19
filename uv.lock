@@ -87,29 +87,27 @@ wheels = [
 
 [[package]]
 name = "py-wordsearch-gen"
-version = "2025.6.1"
+version = "2025.6.2"
 source = { editable = "." }
 dependencies = [
     { name = "dykes" },
-    { name = "ruff" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "coverage" },
     { name = "pytest" },
+    { name = "ruff" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "dykes", specifier = ">=0.3.0" },
-    { name = "ruff", specifier = ">=0.9.4" },
-]
+requires-dist = [{ name = "dykes", specifier = ">=0.3.0" }]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "coverage", specifier = ">=7.8.0" },
     { name = "pytest", specifier = ">=8.3.5" },
+    { name = "ruff", specifier = ">=0.9.4" },
 ]
 
 [[package]]

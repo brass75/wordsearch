@@ -19,18 +19,20 @@ pip install py-wordsearch-gen
 To use just run `wordsearch` from the command line.
 
 ```shell
-usage: wordsearch [-h] [-s SIZE] [-m MIN] [-d] [-r] [-k] words [words ...]
+usage: wordsearch.py [-h] [-w [WIDTH]] [-t [HEIGHT]] [-m [MIN_WORD]] [-d] [-r] [-k] words [words ...]
 
 Word Search Generator
 
 positional arguments:
-  words             List of words for the search.
+  words                 List of words for the search.
 
 options:
-  -h, --help        show this help message and exit
-  -s, --size SIZE   The size of the word search grid from 5 - 50. (Default: 10)
-  -m, --min MIN     The minimum word length. Cannot be larger than the size of the grid. (Default: 4)
-  -d, --diagonal    Allow words to be placed diagonally.
-  -r, --reverse     Allow words to be placed backwards.
-  -k, --answer-key  Print the answer key ahead of the puzzle.
+  -h, --help            show this help message and exit
+  -w, --width [WIDTH]   Width of puzzle, (Default: 10)
+  -t, --height [HEIGHT]
+                        Height of puzzle, If not set will be the same as the width (square puzzle.)
+  -m, --min [MIN_WORD]  The minimum word length. Cannot be larger than the size of the grid. (Default: 4)
+  -d, --diagonal        Allow words to be placed diagonally.
+  -r, --reverse         Allow words to be placed backwards.
+  -k, --answer-key      Print the answer key ahead of the puzzle.
 ```

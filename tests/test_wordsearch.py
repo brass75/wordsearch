@@ -36,7 +36,7 @@ class TestWordSearch:
             (
                 False,
                 False,
-                5,
+                (5, 5),
                 ['GIRL', 'BOY', 'DOG'],
                 (
                     [
@@ -53,7 +53,7 @@ class TestWordSearch:
             (
                 False,
                 False,
-                5,
+                (5, 6),
                 ['GIRL', 'BOY', 'DOG', 'TOOLONG'],
                 (
                     [
@@ -61,6 +61,7 @@ class TestWordSearch:
                         ['.', 'O', 'O', 'I', '.'],
                         ['.', 'G', 'Y', 'R', '.'],
                         ['.', '.', '.', 'L', '.'],
+                        ['.', '.', '.', '.', '.'],
                         ['.', '.', '.', '.', '.'],
                     ],
                     ['GIRL', 'BOY', 'DOG', 'TOOLONG'],
@@ -70,7 +71,7 @@ class TestWordSearch:
             (
                 True,
                 True,
-                5,
+                (5, 6),
                 ['GIRL', 'BOY', 'DOG', 'CHILD'],
                 (
                     [
@@ -79,6 +80,7 @@ class TestWordSearch:
                         ['D', 'B', 'I', 'R', '.'],
                         ['.', 'H', 'I', '.', '.'],
                         ['C', 'G', '.', '.', '.'],
+                        ['.', '.', '.', '.', '.'],
                     ],
                     ['GIRL', 'BOY', 'DOG', 'CHILD'],
                 ),
@@ -95,8 +97,8 @@ class TestWordSearch:
         [
             ('v', 5, 5, (6, 5), False),
             ('h', 5, 5, (5, 6), False),
-            ('du', 5, 5, (4, 6), False),
-            ('dd', 5, 5, (6, 6), False),
+            ('du', 4, 5, (3, 6), False),
+            ('dd', 5, 4, (6, 5), False),
             ('N', 5, 5, (6, 5), True),
         ],
     )
