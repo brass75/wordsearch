@@ -97,8 +97,8 @@ class TestWordSearch:
         [
             ('v', 5, 5, (6, 5), False),
             ('h', 5, 5, (5, 6), False),
-            ('du', 5, 5, (4, 6), False),
-            ('dd', 5, 5, (6, 6), False),
+            ('du', 4, 5, (3, 6), False),
+            ('dd', 5, 4, (6, 5), False),
             ('N', 5, 5, (6, 5), True),
         ],
     )

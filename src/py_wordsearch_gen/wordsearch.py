@@ -4,7 +4,7 @@ import copy
 from itertools import permutations
 from random import choice, randint, shuffle
 
-from py_wordsearch_gen.arguments import get_parameters
+from py_wordsearch_gen.arguments import get_parameters, print_parameters
 from py_wordsearch_gen.consts import LETTERS
 
 
@@ -162,18 +162,6 @@ def output_search(answer_key: bool, grid: list[list[str]], word_list: list[str])
     shuffle(word_list)
     for n in range(0, len(word_list), 5):
         print(' '.join(word_list[n : n + 5]))
-
-
-def print_parameters(backwards: bool, diagonal: bool, grid_size: tuple[int, int], words: list[str]):
-    """Print the parameters being used to create the search"""
-    print('Welcome to the Word Search Generator')
-    print('We will be creating your search with the following attributes:')
-    print(f'\tThe grid will be {"x".join(map(str, grid_size))} letters.')
-    print(f'\tWe will {"allow" if diagonal else "not allow"} words to be placed diagonally.')
-    print(f'\tWe will {"allow" if backwards else "not allow"} words to be placed backwards.')
-    print('\tThe words we are using are:')
-    for n in range(0, len(words), 5):
-        print('\t\t' + ', '.join(words[n : n + 5]))
 
 
 def main():

@@ -6,10 +6,9 @@ from typing import Annotated
 from dykes import StoreTrue, parse_args
 from dykes.options import Flags, NArgs
 
-OPTIONAL = NArgs('?')
-
 from py_wordsearch_gen.consts import LETTERS
 
+OPTIONAL = NArgs('?')
 
 
 @dataclass
@@ -21,23 +20,17 @@ class WSArgs:
         'List of words for the search.',
         NArgs(value='+'),
     ]
-    # size: Annotated[
-    #     int,
-    #     'The size of the word search grid from 5 - 50. (Default: 10)',
-    #     NArgs('?'),
-    #     Flags('-s', '--size'),
-    # ] = 10
     width: Annotated[
         int,
         'Width of puzzle, (Default: 10)',
         OPTIONAL,
-        Flags('-w', '--width')
+        Flags('-w', '--width'),
     ] = 10
     height: Annotated[
         int,
         'Height of puzzle, If not set will be the same as the width (square puzzle.)',
         OPTIONAL,
-        Flags('-t', '--height')
+        Flags('-t', '--height'),
     ] = 0
     min_word: Annotated[
         int,
@@ -81,3 +74,15 @@ def get_parameters() -> tuple[bool, bool, bool, tuple[int, int], list[str]]:
         exit(1)
     words = [word.upper() for word in args.words]
     return args.answer_key, args.reverse, args.diagonal, grid_size, words
+
+
+def print_parameters(backwards: bool, diagonal: bool, grid_size: tuple[int, int], words: list[str]):
+    """Print the parameters being used to create the search"""
+    print('Welcome to the Word Search Generator')
+    print('We will be creating your search with the following attributes:')
+    print(f'\tThe grid will be {"x".join(map(str, grid_size))} letters.')
+    print(f'\tWe will {"allow" if diagonal else "not allow"} words to be placed diagonally.')
+    print(f'\tWe will {"allow" if backwards else "not allow"} words to be placed backwards.')
+    print('\tThe words we are using are:')
+    for n in range(0, len(words), 5):
+        print('\t\t' + ', '.join(words[n : n + 5]))
