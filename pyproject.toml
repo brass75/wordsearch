@@ -12,8 +12,9 @@ readme = "README.md"
 authors = [{name = "Dan Shernicoff", email = "dan@brassnet.biz"}]
 license = "MIT"
 license-files = ["LICENSE.md"]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
+    "dykes>=0.3.0",
     "ruff>=0.9.4",
 ]
 

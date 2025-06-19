@@ -1,40 +1,11 @@
 #! /usr/bin/env python3
 
-import argparse
 import copy
-import sys
-from argparse import Namespace
 from itertools import permutations
 from random import choice, randint, shuffle
 
-LETTERS = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-]
+from py_wordsearch_gen.arguments import get_parameters
+from py_wordsearch_gen.consts import LETTERS
 
 
 def get_next(x: int, y: int, d: str) -> tuple[int, int]:
@@ -168,81 +139,6 @@ def build_search(
             print(f'Unable to place {repr(_word)}.')
         words.remove(_word)
     return grid, word_list
-
-
-def parse_args() -> Namespace:
-    """
-    Parse the command line arguments
-
-    :return: The parsed command line arguments
-    """
-    parser = argparse.ArgumentParser(
-        prog=sys.argv[0].rsplit('/', 1)[-1],
-        description='Word Search Generator',
-    )
-    parser.add_argument(
-        '-s',
-        '--size',
-        type=int,
-        default=10,
-        required=False,
-        help='The size of the word search grid from 5 - 50. (Default: 10)',
-    )
-    parser.add_argument(
-        '-m',
-        '--min',
-        type=int,
-        default=4,
-        required=False,
-        help='The minimum word length. Cannot be larger than the size of the grid. (Default: 4)',
-    )
-    parser.add_argument(
-        '-d',
-        '--diagonal',
-        action='store_true',
-        help='Allow words to be placed diagonally.',
-    )
-    parser.add_argument(
-        '-r',
-        '--reverse',
-        action='store_true',
-        help='Allow words to be placed backwards.',
-    )
-    parser.add_argument(
-        'words',
-        nargs='+',
-        help='List of words for the search.',
-    )
-    parser.add_argument(
-        '-k', '--answer-key', action='store_true', dest='answer_key', help='Print the answer key ahead of the puzzle.'
-    )
-    return parser.parse_args()
-
-
-def get_parameters() -> tuple[bool, bool, bool, int, list[str]]:
-    """
-    Get the parameters for the word search
-
-    :return: The parameters for the word search
-    """
-    args = parse_args()
-    if not 5 <= (grid_size := args.size) <= 50:
-        print(f'Illegal size: {grid_size}. Grid size must be between 5 and 50.')
-        exit(1)
-    if not 3 <= (shortest := args.min) <= grid_size:
-        print(f'Illegal minimum word length {shortest}. Must be between 3 and {grid_size}.')
-        exit(1)
-    if illegal_words := [
-        word
-        for word in args.words
-        if (len(word) < shortest or len(word) > grid_size) or any(letter not in LETTERS for letter in word.upper())
-    ]:
-        print('Illegal words found:')
-        for word in illegal_words:
-            print('Too ' + ('short: ' if len(word) < shortest else 'long:  ') + word)
-        exit(1)
-    words = [word.upper() for word in args.words]
-    return args.answer_key, args.reverse, args.diagonal, grid_size, words
 
 
 def output_search(answer_key: bool, grid: list[list[str]], word_list: list[str]):
