@@ -6,7 +6,7 @@ build-backend = "uv_build"
 
 [project]
 name = "py-wordsearch-gen"
-version = "2025.6.3"
+version = "2025.7.1"
 description = "Command line tool to generate fun to play word searches."
 readme = "README.md"
 authors = [{name = "Dan Shernicoff", email = "dan@brassnet.biz"}]
@@ -14,7 +14,7 @@ license = "MIT"
 license-files = ["LICENSE.md"]
 requires-python = ">=3.12"
 dependencies = [
-    "dykes>=0.3.0",
+    "dykes==0.4.0",
 ]
 
 [project.urls]
