@@ -16,7 +16,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
       - name: Build
-        run: 
+        run: |
           echo "SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
           uv build
       - name: Upload artifact
