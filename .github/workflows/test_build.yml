@@ -22,7 +22,7 @@ jobs:
         with:
           python-version-file: pyproject.toml
       - name: Build
-        run: 
+        run: |
           echo "SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
           uv build
           ls dist/
