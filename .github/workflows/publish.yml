@@ -1,6 +1,4 @@
 name: Publish
-permissions:
-  contents: read
 on:
   release:
     types: [published]
@@ -23,8 +21,9 @@ jobs:
         with:
           python-version-file: pyproject.toml
       - name: Build
-        run: echo "SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
-        run: uv build
+        run: 
+          echo "SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
+          uv build
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
