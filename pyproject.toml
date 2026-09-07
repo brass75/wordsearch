@@ -7,13 +7,19 @@ name = "py-wordsearch-gen"
 version = "2025.7.2"
 description = "Command line tool to generate fun to play word searches."
 readme = "README.md"
-authors = [{name = "Dan Shernicoff", email = "dan@brassnet.biz"}]
+authors = [{ name = "Dan Shernicoff", email = "dan@brassnet.biz" }]
 license = "MIT"
 license-files = ["LICENSE.md"]
 requires-python = ">=3.12"
-dependencies = [
-    "dykes==0.4.0",
+
+classifiers = [
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
 ]
+
+dependencies = ["dykes==0.4.0"]
 
 [project.urls]
 homepage = "https://github.com/brass75/wordsearch"
@@ -28,22 +34,20 @@ target-version = "py312"
 # Allow lines to be as long as 120 characters.
 line-length = 120
 lint.select = [
-  "E",   # pycodestyle
-  "F",   # pyflakes
-  "UP",  # pyupgrade
-  "I",   # imports
+  "E",  # pycodestyle
+  "F",  # pyflakes
+  "UP", # pyupgrade
+  "I",  # imports
 ]
 
 
-lint.ignore = [
-]
+lint.ignore = []
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 lint.fixable = ["ALL"]
 lint.unfixable = []
 
-exclude = [
-]
+exclude = []
 
 [tool.ruff.format]
 quote-style = "single"
@@ -51,8 +55,4 @@ indent-style = "space"
 docstring-code-format = true
 
 [dependency-groups]
-dev = [
-    "coverage>=7.8.0",
-    "pytest>=8.3.5",
-    "ruff>=0.9.4",
-]
+dev = ["coverage>=7.8.0", "pytest>=8.3.5", "ruff>=0.9.4"]
